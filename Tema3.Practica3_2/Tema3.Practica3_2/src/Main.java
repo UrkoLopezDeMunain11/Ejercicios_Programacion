@@ -1,5 +1,6 @@
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -29,11 +30,11 @@ public class Main {
             do {
                 System.out.println("Introduce el nombre del producto: ");
                 String producto = sc.nextLine();
-                Pattern pt = Pattern.compile("^[A-Za-zÁÉÍÓÚáéíóú]");
+                Pattern pt = Pattern.compile("^[A-Za-zÁÉÍÓÚáéíóú]*");
                 Matcher mat = pt.matcher(producto);
                 if (mat.matches()) {
                     productos.add(producto);
-                    System.out.println("Producto" + producto + "añadido correctamnete");
+                    System.out.println("Producto" +" "+ producto +" "+ "añadido correctamnete");
                     productoValido = true;
                 } else {
                     System.out.println("El nombre del producto introducido no es valido");
@@ -55,10 +56,12 @@ public class Main {
                     System.out.println("introduce el dia");
                     int d = sc.nextInt();
 
+                    sc.nextLine();
+
                     LocalDate d1 = LocalDate.of(a, m, d);
                     System.out.println(d1);
-                    fechaValida = true;
                     fechas.add(d1.toString());
+                    fechaValida = true;
                 } catch (InputMismatchException e) {
                     System.out.println("ERROR");
                     sc.next();
@@ -76,51 +79,24 @@ public class Main {
                 respuesta = sc.nextLine();
                 if (!respuesta.equalsIgnoreCase("SI") && !respuesta.equalsIgnoreCase("NO")) {
                     System.out.println("Respuesta incorrecta");
-                    respuestaValida = false;
                 } else {
                     System.out.println("Respuesta correcta");
                     respuestaValida = true;
                 }
             } while (!respuestaValida);
 
-        } while (respuesta.equalsIgnoreCase("NO"));
+        } while (respuesta.equalsIgnoreCase("SI"));
     }
 
 
     private static void eliminarProductosCaducados() {
         String respuesta;
         do {
-            boolean fechaValida = false;
-            LocalDate fechaCadu = null;
-            do {
-                try {
-                    System.out.println("-------Solicitar fecha------");
-                    System.out.println("introduce el año");
-                    int a = sc.nextInt();
-
-                    System.out.println("introduce el mes");
-                    int m = sc.nextInt();
-
-                    System.out.println("introduce el dia");
-                    int d = sc.nextInt();
-
-                    fechaCadu = LocalDate.of(a, m, d);
-                    System.out.println(fechaCadu);
-                    fechaValida = true;
-                } catch (InputMismatchException e) {
-                    System.out.println("ERROR");
-                    sc.next();
-                    fechaValida = false;
-                } catch (DateTimeException e) {
-                    System.out.println("ERROR");
-                    sc.next();
-                    fechaValida = false;
-                }
-            } while (!fechaValida);
-
+            LocalDate fechaCadu = LocalDate.now();
+            System.out.println("La fecha de hoy es: " + fechaCadu +" "+ "si la fecha del producto es anterior a esta se eliminara el producto, PRODUCTO CADUCADO");
 
             LocalDate fechaProducto = LocalDate.parse(fechas.peek()); // obtenemos la fecha, porq con string no se podria comparar con el locadate de fechasCadu, y le opnemos otroo nombre fechaProducto
-            if (fechaProducto.isAfter(fechaCadu)) {
+            if (fechaProducto.isBefore(fechaCadu)) {
                 System.out.println("El producto eliminado es: " + productos.peek());
                 fechas.poll(); // borro la fecha q sea menor q la fechaCadu
                 productos.poll();// y ahora el producto
