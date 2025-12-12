@@ -92,17 +92,33 @@ public class Main {
     private static void eliminarProductosCaducados() {
         String respuesta;
         do {
-            LocalDate fechaCadu = LocalDate.now();
-            System.out.println("La fecha de hoy es: " + fechaCadu +" "+ "si la fecha del producto es anterior a esta se eliminara el producto, PRODUCTO CADUCADO");
+            LocalDate fechaCadu = null;
+            System.out.println("La fecha de hoy es: " + fechaCadu + " " + "si la fecha del producto es anterior a esta se eliminara el producto, PRODUCTO CADUCADO");
 
-            LocalDate fechaProducto = LocalDate.parse(fechas.peek()); // obtenemos la fecha, porq con string no se podria comparar con el locadate de fechasCadu, y le opnemos otroo nombre fechaProducto
-            if (fechaProducto.isBefore(fechaCadu)) {
-                System.out.println("El producto eliminado es: " + productos.peek());
-                fechas.poll(); // borro la fecha q sea menor q la fechaCadu
-                productos.poll();// y ahora el producto
-            } else {
-                System.out.println("No se ha eliminado ningun producto");
+            Queue<String> productosTemp = new LinkedList<>();
+            Queue<String> fechasTemp = new LinkedList<>();
+            fechaCadu = LocalDate.now();
+
+            while (!productos.isEmpty()) {
+                //si e primero es yogurt, leche, pan , coge ese primero y la primera fecha hace estas dos de abajp y luego el if o el ese dependiendo de la feha
+                //si es anterior a la fevha , se elimina entonces el yogurt y ya solo queadaria leche y pan
+                //hacemos estas dos de abjabo y claro ahora el primero es leche, entonces hacemos lo mismo q con yogurt y quedaria el la lista al hacer las dos de abajo pan
+                //si es depues de la fehca de cadu, entra en el else y entonces guardamos leche en las nuevas lista y lugeo y ala metemos en las listas del principio
+                //ahora con pan si es como leche igual q leche si es coo yogur igul
+                String producto = productos.poll(); // sacamos y eliminamos el primer producto de la fila y lo guardamos en productos entonces el la lista prodcutos ahora mismo estaria leche y pan
+                LocalDate fechaProducto = LocalDate.parse(fechas.poll()); // lo mismo, primera fecha y lo guardamos en fechaProducto
+
+
+                if (fechaProducto.isBefore(fechaCadu)) {//si esa fecha es de antes entra en este entonces se elimina ese producto
+                    System.out.println("Producto eliminado: " + producto);
+                } else {
+                    productosTemp.add(producto);
+                    fechasTemp.add(fechaProducto.toString());
+                }
             }
+
+            productos = productosTemp;
+            fechas = fechasTemp;
 
             System.out.println("Las listan quesarian asi: " + productos + fechas);
             sc.nextLine();
