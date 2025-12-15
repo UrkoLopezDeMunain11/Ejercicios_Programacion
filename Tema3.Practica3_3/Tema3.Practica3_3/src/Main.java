@@ -1,6 +1,8 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -56,10 +58,22 @@ public class Main {
     private static void añadirUnLibroPila() {
         String respuesta;
         do {
-            System.out.println("Introduce el libreo que quieres añadir a la pila: ");
-            String libro = sc.next();
-            pila.push(libro);
-            System.out.println("Libro añadido correctamente" + pila);
+            boolean libroValido = false;
+            do {
+                System.out.println("Introduce el libreo que quieres añadir a la pila: ");
+                String libro = sc.next();
+                Pattern pt = Pattern.compile("^[A-Za-zÁÉÍÓÚáéíóú]*$");
+                Matcher mat = pt.matcher(libro);
+                if (mat.matches()) {
+                    pila.push(libro);
+                    System.out.println("Libro añadido correctamente" + pila);
+                    libroValido = true;
+                } else {
+                    System.out.println("El libro introoducido no se ha podidio añador, introduce solo letras");
+                    libroValido = false;
+                }
+            }while(!libroValido);
+
 
             boolean respuestaValida = false;
             do {
@@ -87,9 +101,13 @@ public class Main {
     }
 
     private static void retirarlibroParteSuperior() {
-        String libroRetirado = pila.pop();//guardo el libro q elimino en otra variable para luego poder mostrr el libro q he eliminado
-        System.out.println("Libro"+" "+ libroRetirado +" "+ "retirado correctamente");//muestro el libro retirado
-        System.out.println("La pila de libros quedaria asi: " + pila);//muesro la pila despues de borrar el ultimo libro, ese ya no a`parecera
+        if (!pila.isEmpty()) {
+            String libroRetirado = pila.pop();//guardo el libro q elimino en otra variable para luego poder mostrr el libro q he eliminado
+            System.out.println("Libro" + " " + libroRetirado + " " + "retirado correctamente");//muestro el libro retirado
+            System.out.println("La pila de libros quedaria asi: " + pila);//muesro la pila despues de borrar el ultimo libro, ese ya no a`parecera
+        }else{
+            System.out.println("La pila de libros esta vacia, debe intorducir libros");
+        }
     }
 
     private static void mostrarTodosLibrosEnLaPila() {
