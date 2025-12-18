@@ -1,6 +1,7 @@
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -32,7 +33,7 @@ public class Main {
         int dia;
         do {
             boolean numeroValido = false;
-            int numeroMes;
+            int numeroMes = 0;
 
             boolean diaValido = false;
             do {
@@ -48,22 +49,39 @@ public class Main {
             }while(!diaValido);
 
 
-            do {
-                System.out.println("Introduce el numero dl mes del 1 al 12: ");
-                numeroMes = sc.nextInt();
-                numeroValido = true;
 
-                if (numeroMes < 1 || numeroMes > 12) {
-                    System.out.println("Número de mes inválido. Intenta de nuevo.");
+            do {
+                try {
+                    System.out.println("Introduce el numero dl mes del 1 al 12: ");
+                    numeroMes = sc.nextInt();
+                    numeroValido = true;
+
+                    if (numeroMes < 1 || numeroMes > 12) {
+                        System.out.println("Número de mes inválido. Intenta de nuevo.");
+                        numeroValido = false;
+                    }
+                }catch(InputMismatchException e) {
+                    System.out.println("ERROR");
+                    sc.next();
                     numeroValido = false;
                 }
             } while (!numeroValido);
 
             String mes = meses[numeroMes - 1];//Ejemplo: meses[3-1] → meses[2] entonces gurdara en esa nueba variable el mes marszo q es el que esta en laposixion 2
 
-            System.out.println("Introduce la cantidad pagada: ");
-            cantidad = sc.nextInt();
-            sc.nextLine();
+            boolean cantidadValida = false;
+            do {
+                try {
+                    System.out.println("Introduce la cantidad pagada: ");
+                    cantidad = sc.nextInt();
+                    sc.nextLine();
+                    cantidadValida = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("ERROR");
+                    sc.next();
+                    cantidadValida = false;
+                }
+            }while(!cantidadValida);
 
             map.put(mes, map.getOrDefault(mes, 0) + cantidad);//para no sobreescribir si se repite el mes, asi suma todas las cantidades del mimsom mes
             System.out.println("El map contiene: " + map);
@@ -86,12 +104,15 @@ public class Main {
     }
 
     private static void ordenar() {
-        List<Map.Entry<String, Integer>> lista = new ArrayList<>(map.entrySet());
+        LinkedHashMap<String, Integer> ordenada = map.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
 
-        Collections.sort(lista, (e1, e2) -> e1.getValue().compareTo(e2.getValue()));
-
-        System.out.println(lista.toString());
-
+        System.out.println(ordenada.toString());
     }
 
 }
+
