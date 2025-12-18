@@ -51,10 +51,6 @@ public class Main {
             do {
                 System.out.println("Introduce el numero dl mes del 1 al 12: ");
                 numeroMes = sc.nextInt();
-
-                System.out.println("Introduce la cantidad pagada: ");
-                cantidad = sc.nextInt();
-                sc.nextLine();
                 numeroValido = true;
 
                 if (numeroMes < 1 || numeroMes > 12) {
@@ -64,6 +60,10 @@ public class Main {
             } while (!numeroValido);
 
             String mes = meses[numeroMes - 1];//Ejemplo: meses[3-1] → meses[2] entonces gurdara en esa nueba variable el mes marszo q es el que esta en laposixion 2
+
+            System.out.println("Introduce la cantidad pagada: ");
+            cantidad = sc.nextInt();
+            sc.nextLine();
 
             map.put(mes, map.getOrDefault(mes, 0) + cantidad);//para no sobreescribir si se repite el mes, asi suma todas las cantidades del mimsom mes
             System.out.println("El map contiene: " + map);
