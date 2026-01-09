@@ -9,10 +9,10 @@ public class Main {
 
         System.out.println("Lonngitud de la pimera circunferencia es: " + c1.calcularVolume());
         System.out.println("Area de la primera circunferencia seria de : " + c1.calcularArea());
-        System.out.println("Volumen de la primera circunferencia seria de: " + c1.calcularVolume());
+        System.out.println("Volumen de la primera circunferencia seria de: " + c1.calcularLongitud());
         System.out.println("-----------------------------------------------------------------------");
         System.out.println("Lonngitud de la segunda circunferencia es: " + c2.calcularVolume());
         System.out.println("Area de la segunda circunferencia seria de : " + c2.calcularArea());
-        System.out.println("Volumen de la segunda circunferencia seria de: " + c2.calcularVolume());
+        System.out.println("Volumen de la segunda circunferencia seria de: " + c2.calcularLongitud());
     }
 }
