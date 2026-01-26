@@ -169,22 +169,75 @@ public class Main {
     }
 
     private static void datosVeterinarioPartiendoDatosMascota() {
-        System.out.println();
+        boolean nombreMascotaValido1 = false;
+        do {
+            System.out.println("Introduce el nombre de la mascota");
+            String nombreAnimal = sc.next();
+            nombreMascotaValido1 = false;
+            for (Mascota mascota : mascotas) {
+                if (mascota.getNombre().equalsIgnoreCase(nombreAnimal)) {
+                    mascota.getCliente();
+                }
+            }
+        }while(!nombreMascotaValido1);
+
+
     }
 
     private static void datosMascotaDeCliente() {
 
-        System.out.println("Estos son los clientes que hay: ");
-        if (clientes.isEmpty()) {
-            System.out.println("tienes que introducir clientes ");
-        }else {
-            for (int i = 0; i < clientes.size(); i++) {
-                System.out.println((i + 1) + ". " + clientes.get(i).getNombre());
+        System.out.println("Introduce el nombnre del cliente");
+        String nombreCliente = sc.next();
+        boolean clienteEncontrado = false;
+        for(Cliente cliente : clientes) {
+            if(cliente.getNombre().equalsIgnoreCase(nombreCliente)) {
+                clienteEncontrado = true;
 
+
+                //ahora vamos ha mostrar las mascotas del cliente
+                if (cliente.getMascotas().isEmpty()) {//si el clinete notiene mascotas pues entraria qui
+                    System.out.println("El cliente no tiene mascotas.");
+                }else {//si tieen entraria aqui
+                    for(Mascota mascota : cliente.getMascotas()) {
+                        System.out.println("Nombre: " + mascota.getNombre());
+                        System.out.println("Fecha de nacimineto: " +  mascota.getFechaNacimiento());
+                        System.out.println("Sexo: " + mascota.getSexo());
+                        System.out.println("Color" + mascota.getColor());
+                        System.out.println("Raza: " + mascota.getRaza());
+                        System.out.println("Peso: " + mascota.getPeso());
+                        System.out.println("Longitud: " + mascota.getLongitud());
+                    }
+                }
             }
         }
+
+        if (!clienteEncontrado) {
+            System.out.println("Cliente no encontrado.");
+        }
+
     }
 
     private static void datosMascotaDeveterinario() {
+        System.out.println("Introduce el nombre del veterinario: ");
+        String nombreAnimal = sc.next();
+        boolean veterinarioEncontrado = false;
+        for(Veterinario veterinario : veterinarios) {
+            if (veterinario.getNombre().equalsIgnoreCase(nombreAnimal)) {
+                if (veterinario.getMascotas().isEmpty()) {
+                    veterinarioEncontrado = true;
+                    System.out.println("El veterinario no tiene mascotas");
+                }else  {
+                    for(Mascota mascota : mascotas) {
+                        System.out.println("Nombre: " + mascota.getNombre());
+                        System.out.println("Fecha de nacimineto: " +  mascota.getFechaNacimiento());
+                        System.out.println("Sexo: " + mascota.getSexo());
+                        System.out.println("Color" + mascota.getColor());
+                        System.out.println("Raza: " + mascota.getRaza());
+                        System.out.println("Peso: " + mascota.getPeso());
+                        System.out.println("Longitud: " + mascota.getLongitud());
+                    }
+                }
+            }
+        }
     }
 }
