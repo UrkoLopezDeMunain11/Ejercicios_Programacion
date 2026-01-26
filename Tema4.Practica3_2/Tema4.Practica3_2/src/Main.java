@@ -176,7 +176,14 @@ public class Main {
             nombreMascotaValido1 = false;
             for (Mascota mascota : mascotas) {
                 if (mascota.getNombre().equalsIgnoreCase(nombreAnimal)) {
-                    mascota.getCliente();
+                    Veterinario vet = mascota.getVeterinario();
+
+                    // Mostramos sus datos
+                    System.out.println("Datos del veterinario:");
+                    System.out.println("Nombre: " + vet.getNombre());
+                    System.out.println("Direccion: " + vet.getDireccion());
+                    System.out.println("Telefono: " + vet.getTelefono());
+
                 }
             }
         }while(!nombreMascotaValido1);
