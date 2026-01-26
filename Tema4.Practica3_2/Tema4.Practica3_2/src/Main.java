@@ -123,16 +123,24 @@ public class Main {
     }
 
     private static void mostrarNumeroClientesPoseenUnAnimal() {
-        //recorrer lista de clientes, entran en su lista de mascotas
-        System.out.println("Estos son los clientes que hay: ");
-        if (clientes.isEmpty()) {
-            System.out.println("tienes que introducir clientes ");
-        }else {
-            for (int i = 0; i < clientes.size(); i++) {//con esto saco los clientes que hay
-                System.out.println((i + 1) + ". " + clientes.get(i).getNombre() + clientes.get(i).getMascotas());
+        System.out.println("Clientes que poseen al menos una mascota: ");
 
+
+        if (clientes.isEmpty()) {//si esta vacio pues entrara aqui
+            System.out.println("No hay ningún cliente registrado.");
+        } else {
+            int contador = 1; // Para numerar solo los clientes que tienen mascotas
+            for (int i = 0; i < clientes.size(); i++) {
+                if (!clientes.get(i).getMascotas().isEmpty()) {
+                    System.out.println(contador + ". " + clientes.get(i).getNombre() +  clientes.get(i).getMascotas());
+                    contador++; // aumenta solo si el cliente tiene mascota
+                }
+            }
+            if (contador == 1) {
+                System.out.println("Ningún cliente tiene mascotas.");
             }
         }
+
     }
 
     private static void datosClientePartiendoDelNombreAnimal() {
@@ -140,12 +148,19 @@ public class Main {
         do {
             System.out.println("Introduce el nombre de la mascota");
             String nombreAnimal = sc.next();
+            nombreMascotaValido = false;//para reiniciarlo a false, porq cada vez q vuelva si antes al recorrer tosddo ha salido con true aqui entrara con true, se ha quedado ese, entonces lo reiniciamos a false para q vuelva a funcionar bien si meto otro nombre de mascota
             for (Mascota mascota : mascotas) {
                 if (mascota.getNombre().equalsIgnoreCase(nombreAnimal)) {
+                    Cliente cliente = mascota.getCliente(); //para obtener el cliente dueño de esa mascota, porque en mascota tenemos la relacion Cliente cliente
+                    System.out.println("Datos del cliente:");
+                    System.out.println("Nombre: " + cliente.getNombre());
+                    System.out.println("Apellido: " + cliente.getDireccion());
+                    System.out.println("DNI: " + cliente.getTelefono());
                     nombreMascotaValido = true;
-                }else{
-                    System.out.println("El nombre de la mascota introducida no exite, intentelo de nuevo");
-                    nombreMascotaValido = false;
+                }
+
+                if(!nombreMascotaValido){
+                    System.out.println("El nombre de la mascota introducida no existe, inténtelo de nuevo");
                 }
             }
         }while(!nombreMascotaValido);
