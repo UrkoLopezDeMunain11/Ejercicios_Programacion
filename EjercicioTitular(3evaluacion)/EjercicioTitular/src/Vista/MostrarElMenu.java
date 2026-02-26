@@ -5,7 +5,6 @@ import Modelo.Titular;
 
 import javax.swing.*;
 
-import static sun.util.locale.LocaleUtils.isEmpty;
 
 public class MostrarElMenu {
     private TitularController titularController;
