@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.PasajeroController;
+import Modelo.Vuelo;
 
 import java.util.Scanner;
 
@@ -62,9 +63,25 @@ public class MenuPasajero {
         String nombre = sc.next();
         System.out.println("Ingrese el apellido del pasajero:");
         String telefono = sc.next();
-        System.out.println("Ingrese la edad del pasajero:");
-        String cod_vuelo = sc.next();
-        PasajeroController.altaPasajero(dni, nombre, telefono, cod_vuelo);
+        boolean codigoValido = false;
+        String cod_vuelo;
+        do{
+            System.out.println("Ingrese el codigo del vuelo:");
+            cod_vuelo = sc.next();
+            try{
+                Vuelo.setCod_vuelo(cod_vuelo);
+                codigoValido = true;
+
+            }catch(Exception e){
+                System.out.println("Error: " + e.getMessage());
+                System.out.println("Por favor, inténtalo de nuevo");
+
+            }
+        }while(!codigoValido);
+
+        if(codigoValido) {
+            PasajeroController.altaPasajero(dni, nombre, telefono, cod_vuelo);
+        }
 
     }
 
@@ -84,9 +101,25 @@ public class MenuPasajero {
             String nuevoNombre = sc.next();
             System.out.println("Ingrese el nuevo telefono del pasajero:");
             String nuevoTelefono = sc.next();
-            System.out.println("Ingrese el nuevo codigo de vuelo del pasajero:");
-            String nuevoCodVuelo = sc.next();
-            PasajeroController.modificarPasajero(dni, nuevoNombre, nuevoTelefono, nuevoCodVuelo);
+            boolean codigoValido = false;
+            String NuevoCod_vuelo;
+            do{
+                System.out.println("Ingrese el nuevo codigo del vuelo:");
+                NuevoCod_vuelo = sc.next();
+                try{
+                    Vuelo.setCod_vuelo(NuevoCod_vuelo);
+                    codigoValido = true;
+
+                }catch(Exception e){
+                    System.out.println("Error: " + e.getMessage());
+                    System.out.println("Por favor, inténtalo de nuevo");
+
+                }
+            }while(!codigoValido);
+
+            if(codigoValido) {
+                PasajeroController.modificarPasajero(dni, nuevoNombre, nuevoTelefono, NuevoCod_vuelo);
+            }
         }
 
     }

@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.VueloController;
+import Modelo.Vuelo;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -64,33 +65,83 @@ public class MenuVuelo {
 
     private void agregarVuelo() {
         System.out.println("\n--- AGREGAR VUELO ---");
-        System.out.println("Ingrese el código del vuelo:");
-        String codigo = sc.next();
-        System.out.println("Ingrese el destino del vuelo:");
-        String destino = sc.next();
-        System.out.println("Ingrese la fecha del vuelo (formato: dd/MM/yyyy):");
-        Date fecha = new Date();
-        System.out.println("Ingrese la procedencia del vuelo:");
-        String procedencia = sc.next();
-        VueloController.agregarVuelo(codigo, destino, fecha, procedencia);
+        boolean codigoValido = false;
+        String cod_vuelo = null;
 
+        do{
+            System.out.println("Ingrese el codigo del vuelo:");
+            cod_vuelo = sc.next();
+
+            try{
+                Vuelo.setCod_vuelo(cod_vuelo);
+                codigoValido = true;
+
+            }catch(Exception e){
+                System.out.println("Error: " + e.getMessage());
+                System.out.println("Por favor, inténtalo de nuevo");
+
+            }
+
+        }while (!codigoValido);
+
+        if(codigoValido) {
+            System.out.println("Ingrese el destino del vuelo:");
+            String destino = sc.next();
+            System.out.println("Ingrese la fecha del vuelo (formato: dd/MM/yyyy):");
+            Date fecha = new Date();
+            System.out.println("Ingrese la procedencia del vuelo:");
+            String procedencia = sc.next();
+            VueloController.agregarVuelo(cod_vuelo, destino, fecha, procedencia);
+        }
     }
 
     private void eliminarVuelo() {
         System.out.println("\n--- ELIMINAR VUELO ---");
-        System.out.println("Ingrese el codigo del vuelo:");
-        String cod_vuelo = sc.next();
-        if(cod_vuelo != null){
-            VueloController.eliminarVuelo(cod_vuelo);
+        boolean codigoValido = false;
+        String cod_vuelo;
+        do{
+            System.out.println("Ingrese el codigo del vuelo:");
+            cod_vuelo = sc.next();
 
+            try{
+                Vuelo.setCod_vuelo(cod_vuelo);
+                codigoValido = true;
+
+            }catch(Exception e){
+                System.out.println("Error: " + e.getMessage());
+                System.out.println("Por favor, inténtalo de nuevo");
+
+            }
+
+        }while(!codigoValido);
+
+
+        if(codigoValido) {
+            VueloController.eliminarVuelo(cod_vuelo);
         }
     }
 
     private void modificarVuelo() {
         System.out.println("\n--- MODIFICAR VUELO ---");
-        System.out.println("Ingrese el codigo del vuelo:");
-        String cod_vuelo = sc.next();
-        if(cod_vuelo != null || !cod_vuelo.isEmpty()){
+        boolean codigoValido = false;
+        String cod_vuelo = null;
+        do{
+            System.out.println("Ingrese el codigo del vuelo:");
+            cod_vuelo = sc.next();
+
+            try{
+                Vuelo.setCod_vuelo(cod_vuelo);
+                codigoValido = true;
+
+            }catch(Exception e){
+                System.out.println("Error: " + e.getMessage());
+                System.out.println("Por favor, inténtalo de nuevo");
+
+            }
+
+        }while(!codigoValido);
+
+        if (codigoValido) {
             System.out.println("Ingrese el nuevo destino del vuelo:");
             String nuevoDestino = sc.next();
             System.out.println("Ingrese la nueva fecha del vuelo (formato: dd/MM/yyyy):");
