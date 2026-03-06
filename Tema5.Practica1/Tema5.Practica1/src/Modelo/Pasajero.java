@@ -21,7 +21,7 @@ public class Pasajero {
     }
 
     public static void setDni(String dni) {
-        this.dni = dni;
+        dni = dni;
     }
 
     public String getNombre() {
@@ -29,7 +29,7 @@ public class Pasajero {
     }
 
     public static void setNombre(String nombre) {
-        this.nombre = nombre;
+        nombre = nombre;
     }
 
     public String getTelefono() {
@@ -37,7 +37,7 @@ public class Pasajero {
     }
 
     public static void setTelefono(String telefono) {
-        this.telefono = telefono;
+        telefono = telefono;
     }
 
     public String getCod_vuelo() {
@@ -48,7 +48,7 @@ public class Pasajero {
         Pattern pt = Pattern.compile("^[A-Z]{3}[0-9]-[0-9]{5}$");
         Matcher mat = pt.matcher(cod_vuelo);
         if (mat.matches()) {
-            this.cod_vuelo = cod_vuelo;
+            cod_vuelo = cod_vuelo;
         } else {
             throw new IllegalArgumentException("El código de vuelo no es válido. Debe seguir el formato AAA000-00000.");
         }
