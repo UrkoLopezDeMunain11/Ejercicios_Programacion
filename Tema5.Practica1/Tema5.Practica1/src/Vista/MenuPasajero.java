@@ -3,6 +3,7 @@ package Vista;
 import Controlador.PasajeroController;
 import Modelo.Pasajero;
 import Modelo.Vuelo;
+import Utilidades.EntradaDatos;
 
 import java.util.List;
 import java.util.Scanner;
@@ -40,10 +41,13 @@ public class MenuPasajero {
                         datosPasajeroDNI();
                         break;
                     case 5:
+                        mostrarPasajerosVuelo();
+                        break;
+                    case 6:
                         System.out.println("Saliendo del programa...");
                         System.exit(0);
                         break;
-                    case 6:// para volver al menu principal al de antes del cual he venido a este
+                    case 7:// para volver al menu principal al de antes del cual he venido a este
                         System.out.println("Volviendo al menú principal...");
                         return;
                     default:
@@ -55,13 +59,12 @@ public class MenuPasajero {
             }
 
 
-        } while (opcion != 5);
+        } while (opcion != 6);
     }
 
     private void altaPasajero() {
         System.out.println("\n--- CREAR PASAJERO ---");
-        System.out.println("Ingrese el DNI del pasajero:");
-        String dni = sc.next();
+        String dni = EntradaDatos.pedirDniValido();
         System.out.println("Ingrese el nombre del pasajero:");
         String nombre = sc.next();
         System.out.println("Ingrese el apellido del pasajero:");
@@ -90,8 +93,7 @@ public class MenuPasajero {
 
     private void bajaPasajero() {
         System.out.println("\n--- ELIMINAR PASAJERO ---");
-        System.out.println("Ingrese el DNI del pasajero:");
-        String dni = sc.next();
+        String dni = EntradaDatos.pedirDniValido();
         PasajeroController.bajaPasajero(dni);
     }
 
@@ -129,8 +131,7 @@ public class MenuPasajero {
 
     private Pasajero datosPasajeroDNI() {
         System.out.println("\n--- DATOS PASAJERO POR DNI ---");
-        System.out.println("Ingrese el DNI del pasajero:");
-        String dni = sc.next();
+        String dni = EntradaDatos.pedirDniValido();
         Pasajero pasajero = PasajeroController.datosPasajeroDNI(dni);
         if (pasajero != null) {
             System.out.println("Paqsajero encontrado con ese dni:" + pasajero);
@@ -138,7 +139,6 @@ public class MenuPasajero {
             System.out.println("No se encontró ningún pasajero con ese DNI.");
         }
         return null;
-
 
     }
 
