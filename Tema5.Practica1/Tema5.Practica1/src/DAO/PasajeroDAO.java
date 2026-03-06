@@ -5,13 +5,16 @@ import Utilidades.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PasajeroDAO {
     public static void insertarPasajero(Pasajero pasajero) {
         String sql = "INSERT INTO pasajeros (dni, nombre, telefono, cod_vuelo) VALUES (?, ?, ?, ?)";
 
-        try{
+        try {
             Connection conn = DBConnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -45,9 +48,7 @@ public class PasajeroDAO {
                 System.out.println("Titular no borrado.");
                 // Mensaje para el usuario
                 throw new Exception(" No se encontró ningún titular con el ID proporcionado.");
-            }
-            else
-            {
+            } else {
                 System.out.println("Titular borrado correctamente.");
             }
 
@@ -64,7 +65,7 @@ public class PasajeroDAO {
     public static void modificarPasajero(String dni, String nuevoNombre, String nuevoTelefono, String nuevoCodVuelo) {
         String sql = "UPDATE pasajeros SET nombre = ?, telefono = ?, cod_vuelo = ? WHERE dni = ?";
 
-        try{
+        try {
             Connection conn = DBConnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -77,9 +78,7 @@ public class PasajeroDAO {
             if (n != 1) {
                 System.out.println("Titular no modificado.");
                 throw new Exception(" No se encontró ningún titular con el ID proporcionado.");
-            }
-            else
-            {
+            } else {
                 System.out.println("Titular modificado correctamente.");
             }
 
@@ -90,5 +89,61 @@ public class PasajeroDAO {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static Pasajero obtenerPasajeroPorDNI(String dni) {
+        String sql = "Select * FROM pasajeros WHERE dni = ?";
+        try {
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, dni);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return new Pasajero(
+                        rs.getString("dni"),
+                        rs.getString("nombre"),
+                        rs.getString("telefono"),
+                        rs.getString("cod_vuelo"));
+            }
+
+            DBConnection.closeConnection();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
+
+    }
+
+    public static List<Pasajero> obtenerPasajerosPorVuelo(String cod_vuelo) {
+        String sql = "SELECT * FROM pasajeros WHERE cod_vuelo = ?";
+        List<Pasajero> pasajeros = new ArrayList<>();
+
+        try {
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, cod_vuelo);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Pasajero pasajero = new Pasajero(
+                        rs.getString("dni"),
+                        rs.getString("nombre"),
+                        rs.getString("telefono"),
+                        rs.getString("cod_vuelo")
+                );
+                pasajeros.add(pasajero);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return pasajeros;
     }
 }

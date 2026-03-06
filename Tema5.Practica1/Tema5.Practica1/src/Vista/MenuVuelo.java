@@ -3,7 +3,10 @@ package Vista;
 import Controlador.VueloController;
 import Modelo.Vuelo;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuVuelo {
@@ -152,12 +155,52 @@ public class MenuVuelo {
         }
     }
 
-    private void mostrarVuelosDestino() {
+    private Vuelo mostrarVuelosDestino() {
+        System.out.println("\n--- MOSTRAR VUELOS POR DESTINO ---");
+        System.out.println("Ingrese el destino del vuelo:");
+        String destino = sc.next();
+        Vuelo vuelo = VueloController.mostrarVuelosDestino(destino);
+        if (vuelo != null) {
+            System.out.println("Vuelo encontrado: " + vuelo);
+        }else{
+            System.out.println("No se encontraron vuelos para ese destino");
+        }
+        return vuelo;
     }
 
     private void mostrarVuelosOrigen() {
+        System.out.println("\n--- MOSTRAR VUELOS POR ORIGEN ---");
+        System.out.println("Ingrese el origen del vuelo:");
+        String origen = sc.next();
+        List<Vuelo> vuelos = VueloController.mostrarVuelosOrigen(origen);
+        if (!vuelos.isEmpty()) {
+            System.out.println("Vuelo encontrado: " + vuelos);
+        }else{
+            System.out.println("No se encontraron vuelos para ese origen");
+        }
     }
 
     private void mostrarVuelosFecha() {
+        System.out.println("\n--- MOSTRAR VUELOS POR FECHA ---");
+
+        System.out.println("Ingrese el dia");
+        int dia = sc.nextInt();
+        System.out.println("Ingrese el mes");
+        int mes = sc.nextInt();
+        System.out.println("Ingrese el año");
+        int año = sc.nextInt();
+
+        LocalDate fecha = LocalDate.of(año, mes, dia);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaFormateada = fecha.format(formatter);
+
+        System.out.println("Vuelos para la fecha " + fechaFormateada + ":");
+        List<Vuelo> vuelos = VueloController.mostrarVuelosFecha(fecha);
+
+        if(!vuelos.isEmpty()) {
+            System.out.println("Vuelo con esa fecha encontrado correctamente: " + vuelos);
+        }else{    
+            System.out.println("No se encontraron vuelos para esa fecha");
+        }
     }
 }
