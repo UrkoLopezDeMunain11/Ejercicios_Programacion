@@ -88,7 +88,7 @@ public class VueloDAO {
             ps.setString(1, destino);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {// tiene que ser while y no if porque puede haber mas de una vuelo con ese destino
                 return new Vuelo(
                         rs.getString("cod_vuelo"),
                         rs.getDate("fecha_salida"),
@@ -115,7 +115,7 @@ public class VueloDAO {
             ps.setDate(1, java.sql.Date.valueOf(fecha));
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()){
+            while(rs.next()){// tiene que ser while y no if porque puede haber mas de una vuelo con esa fecha
                 vuelos.add(new Vuelo(
                         rs.getString("cod_vuelo"),
                         rs.getDate("fecha_salida"),
@@ -144,7 +144,7 @@ public class VueloDAO {
             ps.setString(1, origen);
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()){
+            while(rs.next()){// tiene que ser while y no if porque puede haber mas de una vuelo con ese origen
                 lista.add(new Vuelo(
                         rs.getString("cod_vuelo"),
                         rs.getDate("fecha_salida"),

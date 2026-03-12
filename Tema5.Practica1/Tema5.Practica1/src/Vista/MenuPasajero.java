@@ -74,15 +74,9 @@ public class MenuPasajero {
         do {
             System.out.println("Ingrese el codigo del vuelo:");
             cod_vuelo = sc.next();
-            try {
-                Vuelo.setCod_vuelo(cod_vuelo);
-                codigoValido = true;
 
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
-                System.out.println("Por favor, inténtalo de nuevo");
+            //aqui meter una validacion con la entrada de datos
 
-            }
         } while (!codigoValido);
 
         if (codigoValido) {
@@ -111,15 +105,9 @@ public class MenuPasajero {
             do {
                 System.out.println("Ingrese el nuevo codigo del vuelo:");
                 NuevoCod_vuelo = sc.next();
-                try {
-                    Vuelo.setCod_vuelo(NuevoCod_vuelo);
-                    codigoValido = true;
 
-                } catch (Exception e) {
-                    System.out.println("Error: " + e.getMessage());
-                    System.out.println("Por favor, inténtalo de nuevo");
+                //aqui meter una validacion con la entrada de datos
 
-                }
             } while (!codigoValido);
 
             if (codigoValido) {

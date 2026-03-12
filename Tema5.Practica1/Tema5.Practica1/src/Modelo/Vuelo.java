@@ -20,12 +20,16 @@ public class Vuelo{
         this.listaPasajeros = listaPasajeros;
     }
 
+    public Vuelo() {
 
+    }
+
+// aqui no puede haber ninguno static
     public String getCod_vuelo() {
         return cod_vuelos;
     }
 
-    public static void setCod_vuelo(String cod_vuelos) {
+    public void setCod_vuelo(String cod_vuelos) {
         cod_vuelos = cod_vuelos;
     }
 
@@ -33,7 +37,7 @@ public class Vuelo{
         return fecha_salida;
     }
 
-    public static void setFecha_salida(Date fecha_salida) {
+    public void setFecha_salida(Date fecha_salida) {
         fecha_salida = fecha_salida;
     }
 
@@ -41,7 +45,7 @@ public class Vuelo{
         return destino;
     }
 
-    public static void setDestino(String destino) {
+    public void setDestino(String destino) {
         destino = destino;
     }
 
@@ -49,7 +53,7 @@ public class Vuelo{
         return procedencia;
     }
 
-    public static void setProcedencia(String procedencia) {
+    public  void setProcedencia(String procedencia) {
         procedencia = procedencia;
     }
 

@@ -100,7 +100,7 @@ public class PasajeroDAO {
             ps.setString(1, dni);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
+            if (rs.next()) { // aqui si if y no while porq solo hay un pasajero con ese dni
                 return new Pasajero(
                         rs.getString("dni"),
                         rs.getString("nombre"),
@@ -130,7 +130,7 @@ public class PasajeroDAO {
             ps.setString(1, cod_vuelo);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
+            while (rs.next()) {// tiene que ser while y no if porque puede haber mas de una
                 Pasajero pasajero = new Pasajero(
                         rs.getString("dni"),
                         rs.getString("nombre"),

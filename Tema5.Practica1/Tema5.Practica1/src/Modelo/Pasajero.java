@@ -16,6 +16,11 @@ public class Pasajero {
         this.cod_vuelo = cod_vuelo;
     }
 
+    public Pasajero() {
+
+    }
+
+// aqui no puede haber ninguno static
     public String getDni() {
         return dni;
     }

@@ -75,16 +75,6 @@ public class MenuVuelo {
             System.out.println("Ingrese el codigo del vuelo:");
             cod_vuelo = sc.next();
 
-            try{
-                Vuelo.setCod_vuelo(cod_vuelo);
-                codigoValido = true;
-
-            }catch(Exception e){
-                System.out.println("Error: " + e.getMessage());
-                System.out.println("Por favor, inténtalo de nuevo");
-
-            }
-
         }while (!codigoValido);
 
         if(codigoValido) {
@@ -106,15 +96,7 @@ public class MenuVuelo {
             System.out.println("Ingrese el codigo del vuelo:");
             cod_vuelo = sc.next();
 
-            try{
-                Vuelo.setCod_vuelo(cod_vuelo);
-                codigoValido = true;
-
-            }catch(Exception e){
-                System.out.println("Error: " + e.getMessage());
-                System.out.println("Por favor, inténtalo de nuevo");
-
-            }
+            //aqui meter una validacion con la entrada de datos
 
         }while(!codigoValido);
 
@@ -132,15 +114,8 @@ public class MenuVuelo {
             System.out.println("Ingrese el codigo del vuelo:");
             cod_vuelo = sc.next();
 
-            try{
-                Vuelo.setCod_vuelo(cod_vuelo);
-                codigoValido = true;
+            //aqui meter una validacion con la entrada de datos
 
-            }catch(Exception e){
-                System.out.println("Error: " + e.getMessage());
-                System.out.println("Por favor, inténtalo de nuevo");
-
-            }
 
         }while(!codigoValido);
 

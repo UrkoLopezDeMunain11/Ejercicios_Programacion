@@ -26,10 +26,11 @@ public class VueloController {
     }
 
     public static void modificarVuelo(String codVuelo, String nuevoDestino, Date nuevaFecha, String nuevaProcedencia) {
-        Vuelo.setCod_vuelo(codVuelo);
-        Vuelo.setDestino(nuevoDestino);
-        Vuelo.setFecha_salida(nuevaFecha);
-        Vuelo.setProcedencia(nuevaProcedencia);
+        Vuelo v = new Vuelo();
+        v.setCod_vuelo(codVuelo);
+        v.setDestino(nuevoDestino);
+        v.setFecha_salida(nuevaFecha);
+        v.setProcedencia(nuevaProcedencia);
         vueloDAO.modificarVuelo(codVuelo, nuevoDestino, nuevaFecha, nuevaProcedencia);
     }
 

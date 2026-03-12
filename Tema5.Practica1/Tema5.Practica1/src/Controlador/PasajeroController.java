@@ -18,10 +18,11 @@ public class PasajeroController {
     }
 
     public static void modificarPasajero(String dni, String nuevoNombre, String nuevoTelefono, String nuevoCodVuelo) {
-        Pasajero.setDni(dni);
-        Pasajero.setNombre(nuevoNombre);
-        Pasajero.setTelefono(nuevoTelefono);
-        Pasajero.setCod_vuelo(nuevoCodVuelo);
+        Pasajero p = new Pasajero();
+        p.setDni(dni);
+        p.setNombre(nuevoNombre);
+        p.setTelefono(nuevoTelefono);
+        p.setCod_vuelo(nuevoCodVuelo);
         PasajeroDAO.modificarPasajero(dni, nuevoNombre, nuevoTelefono, nuevoCodVuelo);
     }
 
