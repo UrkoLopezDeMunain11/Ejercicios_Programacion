@@ -1,12 +1,26 @@
 package Modelo;
 
-public class Cuenta {
-        private int id;
-        private String numeroCuenta;
-        private double saldo;
-        private int titularId;
 
-        public Cuenta(int id, String numeroCuenta, double saldo, int titularId) {
+@Entity
+@Table(name = "cuentas")
+public class Cuenta {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private integer id;
+
+    @Column(name = "numeroCuenta", nullable = false, length = 50)
+    private String numeroCuenta;
+
+    @Column(name = "saldo", nullable = false)
+    private double saldo;
+
+
+    public Cuenta() {
+    }
+
+    public Cuenta(int id, String numeroCuenta, double saldo, int titularId) {
             this.id = id;
             this.numeroCuenta = numeroCuenta;
             this.saldo = saldo;
