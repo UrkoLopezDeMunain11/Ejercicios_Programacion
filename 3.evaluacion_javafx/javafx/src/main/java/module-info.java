@@ -6,4 +6,6 @@ module com.example.javafx {
 
 
     opens org.example.demofx to javafx.fxml;
+
+
 }
