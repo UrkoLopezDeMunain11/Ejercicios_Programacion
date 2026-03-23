@@ -2,6 +2,8 @@ package Controlador.vista;
 
 import Controlador.PersonaController;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 
 import java.awt.*;
@@ -62,6 +64,47 @@ public class helloviewController {
         System.exit(0);
     }
 
+    void onActualizar(ActionEvent event){
+        String nombre = tfNombre.getText();// get text es coger lo que hay dentro
+        String apellido = tfApellido.getText();
+        String telefono = tfTelefono.getText();
+        int edad = Integer.parseInt(tfEdad.getText());
+        String dni = tfEdad.getText();
+        LocalDate fechaNacimiento = dpFechaNacimiento.getValue();
+
+        validarNombre(nombre);
+        validarApellido(apellido);
+        validarDNI(dni);
+        validarTelefono(telefono);
+        validarEdad(edad);
+
+
+        PersonaController.ActualizarPersona(nombre, apellido,dni, telefono,fechaNacimiento,edad);
+
+
+    }
+
+    void onborrar(ActionEvent event){
+        String dni = tfDNI.getText();
+
+        if (dni.isEmpty()) {
+            System.err.println("Debes introducir un DNI para borrar.");
+            return;
+        }
+
+        // Opcional: Pedir confirmación (muy recomendado para no borrar por error)
+        if (confirmarAccion("¿Estás seguro de que quieres borrar a esta persona?")) {
+            boolean eliminado = PersonaController.eliminarPersona(dni);
+
+            if (eliminado) {
+                System.out.println("Persona eliminada correctamente.");
+            } else {
+                System.err.println("No se encontró a nadie con ese DNI.");
+            }
+        }
+
+    }
+
     private void validarNombre(String nombre) {
         boolean nombreValido = false;
         do {
@@ -116,6 +159,13 @@ public class helloviewController {
         }while(!edadValida);
     }
 
+    private boolean confirmarAccion(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmar acción");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
 
+        return alert.showAndWait().filter(r -> r == ButtonType.OK).isPresent();
+    }
 
 }

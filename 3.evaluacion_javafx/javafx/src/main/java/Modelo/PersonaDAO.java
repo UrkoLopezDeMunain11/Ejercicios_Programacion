@@ -5,7 +5,6 @@ import Utilidades.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Date;
 
 public class PersonaDAO {
 
@@ -34,5 +33,49 @@ public class PersonaDAO {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public static void actualizarPersona(Persona p) {
+        String sql = "UPDATE persona SET nombre = ?, apellido = ?, fecha_nacimiento = ?, telefono = ?, edad = ? WHERE dni = ? ";
+        try{
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, p.getNombre());
+            ps.setString(2, p.getApellido());
+            ps.setDate(3, p.getFecha_nacimiento());
+            ps.setString(4, p.getTelefono());
+            ps.setInt(5, p.getEdad());
+
+            ps.executeUpdate();
+
+            DBConnection.closeConnection();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static boolean eliminarPersona(String dni) {
+        String sql = "DELETE FROM persona WHERE dni = ?";
+
+        try{
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1,dni);
+
+            ps.executeUpdate();
+
+            DBConnection.closeConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return false;
     }
 }

@@ -11,7 +11,8 @@ public class Persona {
     private int edad;
     private String telefono;
 
-
+    public Persona() {
+    }
 
     public Persona(String nombre, String apellido, String dni, String telefono, LocalDate fechaNacimiento, int edad) {
         this.DNI = DNI;
