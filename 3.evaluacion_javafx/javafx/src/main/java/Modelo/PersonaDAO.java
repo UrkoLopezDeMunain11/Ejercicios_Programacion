@@ -20,7 +20,7 @@ public class PersonaDAO {
             ps.setString(2, p.getApellido());
             ps.setString(3, p.getDNI());
             ps.setString(4, p.getTelefono());
-            ps.setDate(5,p.getFecha_nacimiento());
+            ps.setDate(5, java.sql.Date.valueOf(p.getFecha_nacimiento()));// para cambiar de localdate a date
             ps.setInt(6, p.getEdad());
 
             ps.executeUpdate();
@@ -43,7 +43,7 @@ public class PersonaDAO {
 
             ps.setString(1, p.getNombre());
             ps.setString(2, p.getApellido());
-            ps.setDate(3, p.getFecha_nacimiento());
+            ps.setDate(3, java.sql.Date.valueOf(p.getFecha_nacimiento()));
             ps.setString(4, p.getTelefono());
             ps.setInt(5, p.getEdad());
 

@@ -5,6 +5,5 @@ module com.example.javafx {
     requires java.desktop;
 
 
-    opens com.example.javafx to javafx.fxml;
-    exports com.example.javafx;
+    opens org.example.demofx to javafx.fxml;
 }

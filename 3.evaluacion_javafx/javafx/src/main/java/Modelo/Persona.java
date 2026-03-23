@@ -48,7 +48,7 @@ public class Persona {
         Apellido = apellido;
     }
 
-    public Date getFecha_nacimiento() {
+    public LocalDate getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
