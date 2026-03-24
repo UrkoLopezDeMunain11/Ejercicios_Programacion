@@ -6,7 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 
-// tienen q ser estos tres import para q luego s¡en limpiarcajas te deje usar el clear
+// tienen q ser estos tres import para q luego en limpiarcajas te deje usar el clear
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
