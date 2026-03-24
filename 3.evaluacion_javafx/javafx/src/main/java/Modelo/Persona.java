@@ -14,7 +14,7 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(String nombre, String apellido, String dni, String telefono, LocalDate fechaNacimiento, int edad) {
+    public Persona(String nombre, String apellido, String DNI, String telefono, LocalDate fecha_nacimiento, int edad) {
         this.DNI = DNI;
         this.Nombre = nombre;
         this.Apellido = apellido;

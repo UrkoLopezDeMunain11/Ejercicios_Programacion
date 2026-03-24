@@ -12,9 +12,9 @@ public class MainApplication {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("/org/example/demofx/vista/FormularioPersona.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 440); // lara darle tamaño a la ventana
-        stage.setTitle("Personas"); // el titulo q quiero q tenga
+        stage.setTitle("Personas"); // el título que quiero que tenga
         stage.setScene(scene);
-        stage.show();
+        stage.show();// para mostrarla
     }
 
     public static void main(String[] args) {

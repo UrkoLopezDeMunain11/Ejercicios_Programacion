@@ -6,10 +6,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
+// tienen q ser estos tres import para q luego s¡en limpiarcajas te deje usar el clear
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
+
+
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,21 +61,32 @@ public class helloviewController {
 
         PersonaController.insertarPersona(nombre, apellido,dni, telefono,fechaNacimiento,edad);
 
+        // esto para q salga un cuandro de dialogo dandote la confirmacion
+        confirmarAccion("Persona guardada");
+
+        // esto para q una vez q le hayas dado al botos de guardar, se quite el texto q le has puestoa cada caja
+        limpiarcajas();
+
 
     }
 
+    @FXML
     void onSalir(ActionEvent event){
         System.exit(0);
+
+        confirmarAccion("Saliendo del programa");
     }
 
+    @FXML
     void onActualizar(ActionEvent event){
-        String nombre = tfNombre.getText();// get text es coger lo que hay dentro
+        String nombre = tfNombre.getText();// get text es coger lo que hay dentro, de lo que se ha escrito dentro de la casaj de texto de la vientana q he creado
         String apellido = tfApellido.getText();
         String telefono = tfTelefono.getText();
         int edad = Integer.parseInt(tfEdad.getText());
         String dni = tfEdad.getText();
         LocalDate fechaNacimiento = dpFechaNacimiento.getValue();
 
+        // una vez tenido los daots hay q validarlos
         validarNombre(nombre);
         validarApellido(apellido);
         validarDNI(dni);
@@ -82,10 +96,16 @@ public class helloviewController {
 
         PersonaController.ActualizarPersona(nombre, apellido,dni, telefono,fechaNacimiento,edad);
 
+        confirmarAccion("Persona actualizada");
+
+        limpiarcajas();
+
+
 
     }
 
-    void onborrar(ActionEvent event){
+    @FXML
+    void onBorrar(ActionEvent event){
         String dni = tfDNI.getText();
 
         if (dni.isEmpty()) {
@@ -93,16 +113,10 @@ public class helloviewController {
             return;
         }
 
-        // Opcional: Pedir confirmación (muy recomendado para no borrar por error)
-        if (confirmarAccion("¿Estás seguro de que quieres borrar a esta persona?")) {
-            boolean eliminado = PersonaController.eliminarPersona(dni);
 
-            if (eliminado) {
-                System.out.println("Persona eliminada correctamente.");
-            } else {
-                System.err.println("No se encontró a nadie con ese DNI.");
-            }
-        }
+        confirmarAccion("Persona borrada");
+
+        limpiarcajas();
 
     }
 
@@ -160,6 +174,7 @@ public class helloviewController {
         }while(!edadValida);
     }
 
+    // esta alerta es para q depsues de meter los datos te salga un cuadrado con mensaje de confirmacion, de que se ha hecho
     private boolean confirmarAccion(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmar acción");
@@ -167,6 +182,18 @@ public class helloviewController {
         alert.setContentText(mensaje);
 
         return alert.showAndWait().filter(r -> r == ButtonType.OK).isPresent();
+    }
+
+
+    // esto es para limpiar las cajas de los textos que has puesto dentro una vez hayas actualizado borrado , guardado, salido
+    @FXML
+    private void limpiarcajas(){
+        tfNombre.clear();
+        tfApellido.clear();
+        tfDNI.clear();
+        tfEdad.clear();
+        tfTelefono.clear();
+        dpFechaNacimiento.setValue(null); // Para los DatePicker se usa setValue(null)
     }
 
 }
