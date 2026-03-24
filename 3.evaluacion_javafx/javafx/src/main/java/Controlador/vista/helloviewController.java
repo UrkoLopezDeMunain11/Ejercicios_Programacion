@@ -179,7 +179,8 @@ public class helloviewController {
     private boolean confirmarAccion(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION); // aqui lo crea
         alert.setTitle("Confirmar acción"); // este sera el titulo de la ventana
-        alert.setHeaderText(null); // no es obligatorio es para que la ventana quede mas bonita
+        alert.setHeaderText(null); // no es obligatorio es para que la ventana quede mas bonita. Quita el espacio de arriba
+        // alert.setHeaderText("¡Atención!");  Texto en negrita
         alert.setContentText(mensaje);// este es el mensaje que saldra a la hora de llamar ha este metodo que sera el mensaje q le hemos psado de cada uno a la hora de llmar ha etse metodo
         // alert.setContentText("Confirmación de la acción"); tambien se puede pponer directamente texto aqui y de los otros metodos solollamarle a este metodo sin pasarle mensaje y saldra este mensaje para todos el mismo, el otro es para q cada uno le mande el mensaje suyo presonalizado
         return alert.showAndWait().filter(r -> r == ButtonType.OK).isPresent();// es para el boton q le das y para continuar, salir del cuadro de mensaje de la alarma, sin esto no iria ese boton
